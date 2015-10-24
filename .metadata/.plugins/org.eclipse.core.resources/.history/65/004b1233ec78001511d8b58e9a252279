@@ -1,0 +1,21 @@
+package org.learn.interview;
+
+public class DFSSolution {
+
+	/*
+	 * Company:- Avaya
+	 * Question:- Given a 2D Array of characters, find if the 
+	 * 			  given word can be formed i.e each character is
+	 * 			  adjacent to each other and used exactly once.
+	 * Example:-	["ABCAE"]
+	 * 				["CERTA"]
+	 * 				["PILOC"]
+	 * 
+	 * "CERTO" => true
+	 * "ABCT" => true
+	 * "ATOLRECABC" => true 
+	 * "ATOLRECABCA" => true 
+	 * "ATOLRECABCRTA" => true 
+	 */
+	
+}

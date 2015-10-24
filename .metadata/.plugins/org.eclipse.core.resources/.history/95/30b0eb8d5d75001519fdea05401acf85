@@ -1,0 +1,17 @@
+package org.learn.interview;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class InPlaceFilterTest {
+
+	@Test
+	public void test() {
+		assertEquals(InPlaceFilter.filter(new StringBuilder("Not yet implemented"), 'e'), new StringBuilder("Not yt implmntd"));
+		assertEquals(InPlaceFilter.filter(new StringBuilder(null), 'e'), new StringBuilder(""));
+		assertEquals(InPlaceFilter.filter(new StringBuilder(""), 'e'), new StringBuilder(""));
+	}
+
+}

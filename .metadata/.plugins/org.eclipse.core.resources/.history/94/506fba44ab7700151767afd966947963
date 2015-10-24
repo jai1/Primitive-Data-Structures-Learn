@@ -1,0 +1,20 @@
+package org.learn.interview;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class ReverseStringTest {
+	ReverseString obj = null;
+	@Before
+	public void setUp() throws Exception {
+		obj = new ReverseString();
+	}
+
+	@Test
+	public void test() {
+		assertThat(obj.reverse("Jai is bored"), "derob si iaJ");
+	}
+
+}

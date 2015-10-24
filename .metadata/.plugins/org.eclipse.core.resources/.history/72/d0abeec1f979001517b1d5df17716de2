@@ -1,0 +1,57 @@
+package org.learn.interview;
+
+public class BinaryTree {
+	/*
+	 * Property:-
+	 * a. Every node on the right subtree has to be larger than the current node 
+	 *    and every node on the left subtree has to be smaller than 
+	 *    (or equal to - should not be the case as only unique values 
+	 *    should be in the tree - this also poses the question as to 
+	 *    if such nodes should be left or right of this parent) the current node
+	 * b. If you look at each the tree from the bottom, it looks like a sorted array
+	 * Example:-
+	 * 1. Not a BST (Because of 13)
+	 *	 	 10               
+	 *       / \       
+	 *      /   \      
+	 *     /     \     
+	 *    /       \    
+	 *    9       15       
+	 *   / \      / \   
+	 *  /   \    /   \  
+	 *  2   10  13   16   
+	 * / \     / \  / \ 
+	 * 1 13   12 14  15 18
+	 * 
+	 * 2. A BST         
+	 *	 	 10               
+	 *       / \       
+	 *      /   \      
+	 *     /     \     
+	 *    /       \    
+	 *    9       15       
+	 *   / \      / \   
+	 *  /   \    /   \  
+	 *  2   10  13   16   
+	 * / \     / \  / \ 
+	 * 1  8   12 14  15 18 
+	 */	 
+	 
+	/*
+	 * Comapany:- Microsoft
+	 * Question:- WAP to validate a binary tree.
+	 * Soln 1:- For each node check if element left < element < element right
+	 * 			Can't use this since it will give Example 1 as a valid BST
+	 * Soln 2:- recursively check that the left smaller than the right  
+	 * 
+	 */
+
+	public <T extends Comparable<?>> boolean validateBST(BTNode<T> root) {
+	
+		return false;
+	}
+	
+	
+	
+	
+}

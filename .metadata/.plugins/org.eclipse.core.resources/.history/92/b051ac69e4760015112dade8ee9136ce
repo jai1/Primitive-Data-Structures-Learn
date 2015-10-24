@@ -1,0 +1,61 @@
+package org.bitsight;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Scanner;
+
+class Bin {
+	Integer fromKey;
+	Integer toKey;
+	Integer numberOfContentions;
+	Integer sizeWithoutContention;
+
+}
+
+public class Partitioner {
+
+	TreeMap<Integer, Integer> map;
+	ArrayList<Bin> bins;
+
+	public Partitioner() {
+		map = new LinkedHashMap<Integer, Integer>();
+	}
+
+	public void run(String[] args) {
+		if (args.length < 2) {
+			System.out.println("Need Input File Name and Output File Name as arguments.");
+		}
+		pareInputFile(args[0]);
+		sortHashMap();
+		applyGreedyToPopulateBins();
+		createOutput(args[1]);
+		return;
+	}
+
+	private void sortHashMap() {
+		
+		
+	}
+
+	private void pareInputFile(String string) {
+		Scanner in = null;
+		try {
+			in = new Scanner(new File(string));
+			if (in.hasNextInt())
+				this.bins = new ArrayList<Bin>(in.nextInt());
+			while (in.hasNextInt()) {
+				Integer i = in.nextInt();
+				if (map.containsKey(i))
+					map.put(i, map.get(i) + 1);
+				else
+					map.put(i, 1);
+			}
+		} catch (Exception e) {
+			System.out.println("Exception Occured: " + e.toString());
+		} finally {
+			if (in != null)
+				in.close();
+		}
+	}
+}

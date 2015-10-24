@@ -1,0 +1,50 @@
+package org.learn.interview;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class BinaryTreeTest {
+	/*	 * Example:-
+	 * 1. Not a BST (Because of 13)
+	 *	 	 10               
+	 *       / \       
+	 *      /   \      
+	 *     /     \     
+	 *    /       \    
+	 *    9       15       
+	 *   / \      / \   
+	 *  /   \    /   \  
+	 *  2   10  13   16   
+	 * / \     / \  / \ 
+	 * 1 13   12 14  15 18
+	 * 
+	 * 2. A BST         
+	 *	 	 10               
+	 *       / \       
+	 *      /   \      
+	 *     /     \     
+	 *    /       \    
+	 *    9       15       
+	 *   / \      / \   
+	 *  /   \    /   \  
+	 *  2   10  13   16   
+	 * / \     / \  / \ 
+	 * 1  8   12 14  15 18 
+	 */	 
+	BinaryTree<Float> b = null;
+	BTNode<Float> root = null;
+	@Before
+	public void setUp() throws Exception {
+		b = new BinaryTree<Float>();
+	}
+
+
+	@Test
+	public void test() {
+		root = new BTNode<Float>(10.0f);
+		
+	}
+
+}

@@ -1,0 +1,34 @@
+package org.learn.interview;
+public class InPlaceFilter {
+	/*
+	 * Company:- Google
+	 * Question:- Filter out the given character from a string.
+	 * Example:- filter("jaaaaai", "a") => "ji"
+	 * Note:- Need to use stringbuilder since String in Jaa is immutable hence no InPlace.
+	 */
+	
+	public static StringBuilder filter(StringBuilder str, char ch) {
+		if(str == null || str.equals(""))
+			return new StringBuilder("");
+		int counter = 0;
+		int i = 0;
+		while(i + counter < str.length()) {
+			if(str.charAt(i + counter) == ch ) {
+				counter++;
+				continue;
+			}
+			str.insert(i, str.charAt(i+counter));
+			str.deleteCharAt(i+1);			
+			i++;
+			System.out.println(i);
+			System.out.println(counter);
+			System.out.println(str);
+		}
+		while(i<str.length()) {
+			str.deleteCharAt(i);
+			i++;
+		}
+		return str;		
+	}
+}
+

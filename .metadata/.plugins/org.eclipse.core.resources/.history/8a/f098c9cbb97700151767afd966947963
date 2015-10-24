@@ -1,0 +1,29 @@
+package org.learn.interview;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class ReverseStringTest {
+	StringFunctions obj = null;
+	@Before
+	public void setUp() throws Exception {
+		obj = new StringFunctions();
+	}
+
+	@Test
+	public void reverseStringTest() {
+		assertEquals(obj.reverse("Jai is bored"), "derob si iaJ");
+		assertEquals(obj.reverse("Jai"), "iaJ");
+		assertEquals(obj.reverse("abcd"), "dcba");
+	}
+	
+	@Test
+	public void reverseSentenceTest() {
+		assertEquals(obj.reverseSentence(null), "");
+		assertEquals(obj.reverseSentence("abc"), "abc");
+		assertEquals(obj.reverseSentence("Wow! This is boring."), "boring. is This Wow!");
+	}
+
+}

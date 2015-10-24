@@ -1,0 +1,84 @@
+package org.learn.interview;
+
+public class StringFunctions {
+
+	/*
+	 * Company:- Google, Microsoft
+	 * Question:- WAP to reverse a string In place
+	 * Examples:- "abc" => "cba"
+	 */
+	public String reverse(String in) {
+		if(in == null)
+			return "";
+		StringBuilder input = new StringBuilder(in);
+		Integer start = 0;
+		Integer end = input.length() - 1;
+		while(start < end) {
+			char temp = input.charAt(start);
+			input.setCharAt(start, input.charAt(end));
+			input.setCharAt(end,temp);
+			start++;
+			end--;
+		}
+		return input.toString();
+	}
+	
+	/*
+	 * Company:- Microsoft
+	 * Question:- Reverse a sentence
+	 * Example:- "Jai is" => "is Jai"
+	 * "Wow! This is boring." => "boring. is This Wow!"
+	 */ 
+	public String reverseSentence(String in) {
+		if(in==null) return "";
+		int k = in.indexOf(" ");
+		if(k == -1)
+			return in;
+		else
+			return reverseSentence(in.substring(k+1)) + " " + in.substring(0,k);
+	}
+	
+	/*
+	 * Company:- Sev One
+	 * Question:- Number++ if input is a number else reverse the String.
+	 * Example:- ".2" => "1.2"
+	 * "-1.2" => "-0.2"
+	 * "abc" => "cba"
+	 * "" => ""
+	 */
+	public String reverseOrAdd(String in) {
+		if(in.isEmpty())
+			return "";
+		if(in.matches("-?\\d*(\\.\\d+)?"))
+			return Float.toString(convertToFloat(in) + 1);
+		else
+			return reverse(in);
+	}
+	
+	/*
+	 * Company:- Bloomberg, Microsoft
+	 * Question:- write itoa or ftoa
+	 * Examples:- ".2" => 0.2f
+	 * "-.1" => -0.1f
+	 * "-23" => -23f
+	 * "-2.23" => -2.23f
+	 */
+	public float convertToFloat(String in) {
+		float f = 0.0f;
+		boolean isNegative = (in.charAt(0) == '-');
+		Integer k = in.indexOf('.');
+		Integer divideBy = 0;
+		if(k != -1)
+			divideBy =  (in.length() - 1) - k;
+		for(int i = isNegative?1:0 ; i<in.length(); i++) {
+			if(in.charAt(i) == '.')
+				continue;
+			else
+				f = (f*10) + (in.charAt(i) - '0');
+		}
+		f = (float) (f / Math.pow(10, divideBy));
+		if(isNegative)
+			f *= -1;
+		return f;
+	}
+}

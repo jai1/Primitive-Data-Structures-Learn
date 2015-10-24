@@ -1,0 +1,20 @@
+package org.learn.interview;
+
+public class Point {
+	public Integer x;
+	public Integer y;
+
+	public Point(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	@Override
+	public boolean equals(Object object) {
+		Point p = (Point)Object;
+		return (p.x == this.x && p.y == this.y);
+	}
+	
+	public String toString() {
+		return "[" + this.x + ", " + this.y + "]";
+	}
+}

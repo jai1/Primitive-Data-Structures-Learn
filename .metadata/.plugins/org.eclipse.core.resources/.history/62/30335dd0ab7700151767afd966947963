@@ -1,0 +1,26 @@
+package org.learn.interview;
+
+public class ReverseString {
+
+	/*
+	 * Company:- Google, Microsoft
+	 * Question:- WAP to reverse a string In place
+	 * Examples:- "abc" => "cba"
+	 */
+	String reverse(String in) {
+		if(in == null)
+			return "";
+		StringBuilder input = new StringBuilder(in);
+		Integer start = 0;
+		Integer end = input.length() - 1;
+		while(start < end) {
+			char temp = input.charAt(start);
+			input.setCharAt(start, input.charAt(end));
+			input.setCharAt(end,temp);
+			start++;
+			end--;
+		}
+		return input.toString();
+	}
+	
+}

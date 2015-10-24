@@ -1,0 +1,7 @@
+package org.learn.interview;
+
+public class Point {
+	public Integer x;
+	public Integer y;
+
+}

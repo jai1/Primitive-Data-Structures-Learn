@@ -1,0 +1,22 @@
+package org.learn.interview;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class LinkedListTest {
+
+	
+	@Before
+	public void setUp() throws Exception {
+		LinkedList.Node n = new LinkedList.Node(123);
+	}
+
+	@Test
+	public void test() {
+		n = 
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,34 @@
+package org.bitsight;
+
+import java.util.LinkedHashMap;
+
+class Bin {
+	Integer fromKey;
+	Integer toKey;
+	Integer numberOfContentions;
+	Integer sizeWithoutContention;
+	
+}
+
+public class Main {
+	
+	LinkedHashMap<Integer, Integer> map ;
+	ArrayList<Bin> bins;
+	public Main() {
+		map = new LinkedHashMap<Integer, Integer>();
+	}
+	
+	public static void main(String[] args){
+		if(args.length<2) {
+			System.out.println("Need Input File Name and Output File Name as arguments.");
+		}			
+		pareInputFile(args[0]);
+		sortHashMap();
+		applyGreedyToPopulateBins();
+		createOutput(args[1]);
+		return;
+	}
+
+}
+
+
