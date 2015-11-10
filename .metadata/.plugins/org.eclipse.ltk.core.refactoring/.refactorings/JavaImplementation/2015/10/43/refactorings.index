@@ -5,3 +5,7 @@
 1445539144904	Delete element
 1445539157007	Delete element
 1445656171912	Infer generic type arguments
+1445701077704	Rename type 'SortingAlgorithms'
+1445701118063	Rename type 'SortingAlgorithmsTest'
+1445701144123	Rename type 'SearchingAndSortingAlgos'
+1445701173121	Rename type 'SearchingAndSortingAlgosTest'

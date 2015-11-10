@@ -58,6 +58,82 @@ public class StringFunctionsTest {
 		
 		assertTrue(obj.boardContainsWord(board, "ATOLRECPI"));
 	}
+
+	@Test
+	public void canConvertToPalindrome() {
+		String s = "JaiaJ";
+		assertTrue(obj.canBePalindrome(s));
+		
+		s = "JaaJ";
+		assertTrue(obj.canBePalindrome(s));
+		
+		s = "JaJai";
+		assertTrue(obj.canBePalindrome(s));
+		
+		s = "JaJaii";
+		assertTrue(obj.canBePalindrome(s));
+		
+		s = "JaJail";
+		assertFalse(obj.canBePalindrome(s));
+	}
 	
+	@Test
+	public void compressStringTest() {
+		assertEquals(obj.compressString("Jai"), "Jai");
+		assertEquals(obj.compressString("Jaii"), "Ja2i");
+		assertEquals(obj.compressString("i"), "i");
+		assertEquals(obj.compressString(""), "");
+		assertEquals(obj.compressString("aabbbbcddde"), "2a4bc3de");
+	}
+	
+	@Test
+	public void recursiveCompressStringTest() {
+		assertEquals(obj.recursiveCompressString("Jai"), "Jai");
+		assertEquals(obj.recursiveCompressString("Jaii"), "Ja2i");
+		assertEquals(obj.recursiveCompressString("i"), "i");
+		assertEquals(obj.recursiveCompressString(""), "");
+		assertEquals(obj.recursiveCompressString("aabbbbcddde"), "2a4bc3de");
+	}
+
+	@Test
+	public void getMinTimeDifferenceTest() {
+		String[] data1 = null;
+		String[] data2 = {
+				"10:00", "19:20", "06:45", "00:12", "23:50", "04:22"
+		};
+		String[] data3 = {
+				"10:00", "19:20", "06:45", "00:13", "23:50", "04:22", "23:59"
+		};
+		
+		String[] data4 = {
+				"10:00", "19:20", "06:45", "00:03", "23:50", "04:22", "23:59"
+		};
+		assertEquals(obj.getMinTimeDifference(data1), 0);
+		assertEquals(obj.getMinTimeDifference(data2), 22);
+		assertEquals(obj.getMinTimeDifference(data3), 9);
+		assertEquals(obj.getMinTimeDifference(data4), 4);
+	}
+	
+	@Test
+	public void getSuspiciousListTest() {
+		String[] data1 = {
+				"Shilpa|500|California|63", 
+				"Tom|25|New York|615", 
+				"Krasi|9000|California|1230", 
+				"Tom|25|New York|1235" ,
+				"Tom|25|New York|1238" ,
+				"Shilpa|50|Michigan|1300", 
+				"Matt|90000|Georgia|1305" ,
+				"Jay|100000|Virginia|1310" ,
+				"Krasi|49|Florida|1320" ,
+				"Krasi|83|California|1325", 
+				"Shilpa|50|California|1350" 
+
+		};
+		
+        for(String data : obj.getSuspiciousList(data1))
+			System.out.println(data);
+	}
 }
+
 

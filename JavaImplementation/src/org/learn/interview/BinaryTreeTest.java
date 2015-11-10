@@ -1,78 +1,46 @@
 package org.learn.interview;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class BinaryTreeTest {
-	/*	 * Example:-
-	 * 1. Not a BST (Because of 13)
-	 *	 	 10               
-	 *       / \       
-	 *      /   \      
-	 *     /     \     
-	 *    /       \    
-	 *    9       15       
-	 *   / \      / \   
-	 *  /   \    /   \  
-	 *  2   10  13   16   
-	 * / \     / \  / \ 
-	 * 1 13   12 14  15 18
-	 * 
-	 * 2. A BST         
-	 *	 	 10               
-	 *       / \       
-	 *      /   \      
-	 *     /     \     
-	 *    /       \    
-	 *    9       15       
-	 *   / \      / \   
-	 *  /   \    /   \  
-	 *  2   10  13   16   
-	 * / \     / \  / \ 
-	 * 1  8   12 14 15 18 
-	 */	 
-	BinaryTree<Float> b = null;
-	BTNode<Float> root = null;
+
+	BinaryTree bt = new BinaryTree();
+	BTNode<Integer> root = new BTNode<Integer>(7);
 	@Before
 	public void setUp() throws Exception {
-		b = new BinaryTree<Float>();
-	}
-
-	private void createTree() {
-		root = new BTNode(10.0f);
+		root.left = new BTNode<Integer>(4);
+		root.right = new BTNode<Integer>(9);
 		
-		root.left = new BTNode(9f);
-		root.right = new BTNode(15f);
+		root.left.left= new BTNode<Integer>(2);
+		root.left.right= new BTNode<Integer>(6);
 		
-		root.left.left = new BTNode(2f);
-		root.left.right = new BTNode(10f);
-		root.right.left = new BTNode(13f);
-		root.right.right = new BTNode(17f);
+		root.left.left.left= new BTNode<Integer>(1);
+		root.left.left.right= new BTNode<Integer>(3);
 		
-		root.left.left.left = new BTNode(1f);
-		root.left.left.right = new BTNode(13f);
-		root.right.left.left = new BTNode(12f);
-		root.right.left.right = new BTNode(14f);		
-		root.right.right.left = new BTNode(16f);
-		root.right.right.right = new BTNode(18f);
+		root.left.right.left= new BTNode<Integer>(5);	
 		
+		root.right.left = new BTNode<Integer>(8);	
 	}
 
 	@Test
-	public void test1() {
-		createTree();
+	public void test_1() {
+		BTNode<Integer> a = new BTNode<Integer>(8);
+		BTNode<Integer> b = new BTNode<Integer>(3);
 		
-		assertFalse(b.validateBST(root));
+		BTNode<Integer> result = bt.commonAncestor(root, a, b);
+		assertEquals(result.data, (Integer)7);
 	}
-
-
+	
 	@Test
-	public void test2() {
-		createTree();
-		root.left.left.right = new BTNode(8f);
-		assertTrue(b.validateBST(root));
+	public void test_2() {
+		BTNode<Integer> a = new BTNode<Integer>(1);
+		BTNode<Integer> b = new BTNode<Integer>(6);
+	
+		BTNode<Integer> result = bt.commonAncestor(root, a, b);
+		assertEquals(result.data, (Integer)4);
+	
 	}
-
 }

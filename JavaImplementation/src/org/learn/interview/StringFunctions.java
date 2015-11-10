@@ -1,7 +1,14 @@
 package org.learn.interview;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+import java.util.stream.Stream;
 
 public class StringFunctions {
 
@@ -101,8 +108,8 @@ public class StringFunctions {
 	 * "ATOLRECABCRTA" => true 
 	 */
 	boolean boardContainsWord(char[][] board, String word){
-		System.out.println("++++++++++++++++++++++++++++++++");
-		System.out.println("Word is " + word);
+		//System.out.println("++++++++++++++++++++++++++++++++");
+		//System.out.println("Word is " + word);
 		List<Point> trailSoFar = new ArrayList<Point>();
 		for(int i = 0; i<board.length; i++) {
 			for(int j =0; j<board[i].length; j++) {
@@ -111,7 +118,7 @@ public class StringFunctions {
 					return true;
 			}
 		}
-		System.out.println("++++++++++++++++++++++++++++++++");
+		//System.out.println("++++++++++++++++++++++++++++++++");
 		return false;
 	}
 
@@ -135,16 +142,16 @@ public class StringFunctions {
 		
 		if( i<0 ||
 			p.x < 0 || p.y<0 ||
-			p.x >= board.length || p.y >= board[p.x].length ||
+			p.x >= board.length || p.y >= board[(int) p.x].length ||
 			trailSoFar.contains(p) ||
 			visited.contains(p) ||
-			word.charAt(i) != board[p.x][p.y] )
+			word.charAt(i) != board[(int) p.x][(int) p.y] )
 			return false;
 		
 
 		trailSoFar.add(p);
 		visited.add(p);
-		System.out.println(trailSoFar);
+		//System.out.println(trailSoFar);
 		i+=1;
 		return ((boardContainsWordHelper(board, word, new Point(p.x+1,p.y), trailSoFar, i, null)) ||
 				(boardContainsWordHelper(board, word, new Point(p.x-1,p.y), trailSoFar, i, null)) ||
@@ -153,4 +160,202 @@ public class StringFunctions {
 				((trailSoFar.remove(p)) &&
 				(boardContainsWordHelper(board, word, p, trailSoFar, --i,visited ))));
 	}
+	
+	/*
+	 * Company: Yelp
+	 * Question: Check if a string can be converted into a palindrome
+	 * Example:-
+	 * 	"JaJai" => true ("JaiaJ')
+	 *  "JaJail" => False
+	 */
+	boolean canBePalindrome(String s) {
+		HashMap<Character, Short> m = new HashMap<Character, Short>(); 
+		for(int i=0; i<s.length(); i++) {
+			Character c = s.charAt(i);
+			if(m.containsKey(c))
+				m.put(c, (short) ((m.get(c) + 1) % 2));
+			else
+				m.put(c, (short) 1);
+		}
+		//System.out.println(m);
+		boolean firstTime = true;
+		for(Character c:m.keySet()) {
+			if(m.get(c) == 1 && !firstTime)
+				return false;
+			if(m.get(c) == 1)
+				firstTime = false;
+		}
+		return true;
+	}
+	
+	/* 
+	 * Company:- Google
+	 * Question:-
+	 * Write an algorithm to construct run length encodings of
+	 * arbitrary strings where repeated instances of the same character
+	 * get replaced with
+	 * [number of times character appears] + [character].
+	 * For example, "xxxxxx" becomes "6x" and "x" remains "x".
+	 * It should be unambiguous and the compressed string should always
+	 * be shorter. 
+	 * Example:-.
+	 *   "Jaii" => "Ja2i" 
+	 *   'aaabcccc" => "3ab4c"  
+	 *  TO DO:- Try in place
+	 */
+	public String compressString(String str) {
+		if(str == null || str.length() < 2)
+			return str;
+		String newStr = "";
+		int temp = 1;
+		char ch = str.charAt(0);
+		
+		for (int i = 1; i < str.length(); i++ ) {
+			if(ch == str.charAt(i))
+				temp++;
+			else if(temp > 1) {
+				newStr += Integer.toString(temp) + ch;
+				temp = 1;
+			}
+			else {
+				newStr += ch;
+				temp = 1;
+			}
+			ch = str.charAt(i);
+		}
+		if(temp > 1)
+			newStr += Integer.toString(temp) + ch;
+		else
+			newStr += ch;
+		return newStr;
+	}
+	
+	/*
+	 * Recursive solution
+	 */
+	public String recursiveCompressString(String str) {
+		if(str == null || str.length() < 2)
+			return str;
+		return recursiveCompressStringHelper(str.substring(1), str.charAt(0), 1);
+	}
+	
+	/*
+	 * Invariants:- ch is the previous character in the String
+	 * occurrence is the number of times the character is repeated
+	 */
+	
+	public String recursiveCompressStringHelper(String str, Character ch, Integer occ) {
+		// Termination Condition
+		if(str.length() == 0) {
+			return (occ > 1) ? occ + ch.toString() : ch.toString();
+		}
+		//System.out.println(str +"," + ch + "," + occ);
+		
+		if(ch.equals(str.charAt(0)))
+			return recursiveCompressStringHelper(str.substring(1),ch, occ + 1);
+		else if(occ > 1)
+			return occ + ch.toString() + recursiveCompressStringHelper(str.substring(1), str.charAt(0), 1);
+		else
+			return ch.toString() + recursiveCompressStringHelper(str.substring(1), str.charAt(0), 1);
+	}
+		
+	/*
+	 * Company:- HP 
+	 * Question:- Find the FIRST non repeating element in an array
+	 * Examples:-
+	 * 	"aaaaabccccbdeefghhh"  	=> b
+	 *  "aabbcc"				=> null
+	 * Solution:- Since we need to find the first non repeating, we need to use a Linked HashMap. 
+	 * Normal Hashmap wont do
+	 */
+	Character firstNonRepeating(String str) {
+		LinkedHashMap<Character, Integer> lmap = new LinkedHashMap<Character, Integer>();
+		for(int i = 0; i<str.length(); i++) {
+			Character ch = str.charAt(i);
+			if(lmap.containsKey(ch))
+				lmap.put(ch, lmap.get(ch));
+			else 
+				lmap.put(ch, 1);
+		}
+		for(Character ch : lmap.keySet()) {
+			if(lmap.get(ch) == 1)
+				return ch;
+		}
+		return null;
+	}
+	
+	public int getMinTimeDifference(String[] times) {
+		if(times == null || times.length == 0)
+			return 0;
+		List<Integer> li = new ArrayList<Integer>();
+		for(String time:times) {
+			String[] temp = time.split(":");
+			li.add(Integer.valueOf(temp[0]) * 60 + Integer.valueOf(temp[1]) );
+		}
+		
+		Integer temp = Integer.MAX_VALUE;
+		Collections.sort(li);
+		
+		System.out.println(li);
+		for(int i = 0; i<li.size() - 1; i++) {
+			if(temp > (li.get(i+1) - li.get(i)))
+				temp = (li.get(i+1) - li.get(i));
+		}
+		
+		if(temp > (1440 - li.get(li.size()-1) + li.get(0)))
+			temp = (1440 - li.get(li.size()-1)) + li.get(0);
+			
+		return temp;
+
+
+    }
+
+    public String[] getSuspiciousList(String[] transactions) {
+    	
+    	
+        // Person Name, Time Inserted
+        HashMap<String, Integer> outMap = new HashMap<String, Integer>();
+        
+        // Person Name, Location | Time
+        HashMap<String, String> inMap = new HashMap<String, String>();
+        for(String s : transactions) {
+        	//System.out.println(s);
+            String[] temp = s.split("\\|");
+            
+            String name = temp[0];
+            Integer amount = Integer.valueOf(temp[1]);
+            String location = temp[2];
+        	//System.out.println(temp[3]);
+            Integer time = Integer.valueOf(temp[3]);
+            if(outMap.containsKey(name))
+            	continue;
+            
+            if(amount > 3000)
+            	outMap.put(name, time);
+            
+            if(inMap.containsKey(name)) {
+            	String[] val = inMap.get(name).split("\\|");
+            	String prevLoc = val[0];
+            	Integer prevTime = Integer.valueOf(val[1]);
+            	
+            	if(!prevLoc.equals(location) && time - prevTime < 60 )
+                	outMap.put(name, prevTime);            		
+            } 
+           	inMap.put(name, location + "|" + time.toString());
+        }
+        
+        TreeMap<Integer, String> sortedByValMap = new TreeMap<Integer, String>();
+        
+        for(String name : outMap.keySet())
+        	sortedByValMap.put(outMap.get(name), name);
+        
+        String[] output = new String[sortedByValMap.keySet().size()];
+        int i = 0;
+        for(Integer date : sortedByValMap.keySet())
+        	output[i++] = sortedByValMap.get(date);
+        
+        return output;
+    }
+
+	
 }

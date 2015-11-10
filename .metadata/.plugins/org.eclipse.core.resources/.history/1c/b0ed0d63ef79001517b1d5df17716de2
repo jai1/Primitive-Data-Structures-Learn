@@ -1,9 +1,0 @@
-package org.learn.interview;
-
-public class BTNode {
-	Integer value;
-	BTNode right = null;
-	BTNode left = null;
-	BTNode(Integer val)
-		this.value = val;
-}
