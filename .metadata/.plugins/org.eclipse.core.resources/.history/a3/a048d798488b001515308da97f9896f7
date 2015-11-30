@@ -1,0 +1,6 @@
+package org.implement.data.structure;
+
+public class Node <T>{
+	T val = null;
+	
+}
